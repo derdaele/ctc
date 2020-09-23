@@ -119,7 +119,6 @@ fn is_correct(input: &str, question: &Question) -> bool {
             minutes_diff,
         } => {
             let time: Time = input.parse().unwrap();
-            println!("{}", base_time + minutes_diff);
             time == base_time + minutes_diff
         }
     }
