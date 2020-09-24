@@ -36,7 +36,7 @@ struct Minutes(u8);
 
 impl Distribution<Minutes> for Standard {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Minutes {
-        let minutes: u8 = Uniform::from(0..61).sample(rng);
+        let minutes: u8 = Uniform::from(0..60).sample(rng);
         Minutes(minutes)
     }
 }
