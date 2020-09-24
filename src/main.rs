@@ -138,6 +138,7 @@ fn main() {
     let mut input = String::new();
     let mut correct = false;
     while !correct {
+        input.clear();
         io::stdin().read_line(&mut input).unwrap();
         if is_correct(&input, &question) {
             correct = true;
