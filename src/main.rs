@@ -1,5 +1,8 @@
-use rand::distributions::{Distribution, Standard, Uniform};
 use rand::Rng;
+use rand::{
+    distributions::{Distribution, Standard, Uniform},
+    prelude::SliceRandom,
+};
 use std::env;
 use std::fmt;
 use std::io;
@@ -103,11 +106,14 @@ impl FromStr for Time {
 
 impl Distribution<Question> for Standard {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Question {
-        match rng.gen_range(0, 1) {
-            _ => Question::Time {
+        let question_pool = [("Time", 1)];
+
+        match question_pool.choose_weighted(rng, |q| q.1).unwrap().0 {
+            "Time" => Question::Time {
                 base_time: rng.gen(),
                 minutes_diff: Minutes(rng.gen_range(1, 61)),
             },
+            _ => panic!("Unhandled question!")
         }
     }
 }
